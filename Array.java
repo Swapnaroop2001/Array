@@ -1,0 +1,7 @@
+/**
+ * Array
+ */
+public class Array {
+
+  
+}
