@@ -42,14 +42,19 @@ public class Array {
     }
 
     // Bubble sort
-    public void bubbleSort(int arr[]) {
-        for (int i = arr.length - 1; i > 0; i--) {
+    public static void bubbleSort(int arr[]) {
+        for (int i = arr.length-1; i>=0; i--) {
+            int didSwap=0;
             for (int j = 0; j < i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                if (arr[j]>arr[j+1]) {
+                    int temp=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=temp;
+                    didSwap=1;
                 }
+            }
+            if (didSwap==0) {
+                break;
             }
         }
         for (int i = 0; i < arr.length; i++) {
@@ -58,11 +63,11 @@ public class Array {
     }
 
     // Merge Sort
-    public void sort(int arr[], int low, int high) {
+    public void Mergesort(int arr[], int low, int high) {
         if (low < high) {
             int mid = low + (high - low) / 2;
-            sort(arr, low, mid);
-            sort(arr, mid + 1, low);
+            Mergesort(arr, low, mid);
+            Mergesort(arr, mid + 1, high);
             merge(arr, low, mid, high);
         }
     }
@@ -214,7 +219,6 @@ public class Array {
 
     public static void main(String[] args) {
         int arr[]={8,7,5,6,1,4};
-        ReaverseArray(arr, 0);
-
+        bubbleSort(arr);
     }
 }
