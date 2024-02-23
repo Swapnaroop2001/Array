@@ -62,53 +62,90 @@ public class Array {
         }
     }
 
-    // Quick sort
-    public static void quickSort(int[] array, int low, int high) {
-        if (low < high) {
-            int partitionIndex = partition(array, low, high);
-            quickSort(array, low, partitionIndex - 1);
-            quickSort(array, partitionIndex + 1, high);
+    public static void recursiveBubbleSort(int arr[],int n){
+        if (n==1) {
+            return;
         }
-    }
-
-    public static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
-                i++;
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+        for (int i = 0; i < arr.length-1; i++) {
+            if (arr[i]>arr[i+1]) {
+                int temp=arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
             }
         }
-        int temp = arr[i+1];
-        arr[i+1] = arr[high];
-        arr[high] = temp;
-        return i+1;
+        recursiveBubbleSort(arr,n-1);
     }
 
-    // Merge Sort
-    public static void Mergesort(int arr[], int low, int high) {
-        if (low < high) {
-            int mid = low + (high - low) / 2;
-            Mergesort(arr, low, mid);
-            Mergesort(arr, mid + 1, high);
-            merge(arr, low, mid, high);
+     //Merge sort
+     public static void devide(int arr[],int low,int high) {
+        if (low<high) {
+            int mid= low + (high-low)/2;
+            devide(arr, low, mid);
+            devide(arr, mid+1, high);
+            conquer(arr, low, mid, high);
+        }
+    }
+    public static void conquer(int arr[],int low, int mid,int high) {
+        int ans[]=new int[high-low+1];
+        int k=0;
+        int i=low;
+        int j=mid+1;
+        while (i<=mid && j<=high) {
+            if (arr[i]<=arr[j]) {
+                ans[k]=arr[i];
+                k++;
+                i++;
+            }else{
+                ans[k]=arr[j];
+                k++;
+                j++;
+            }
+        }
+        while (i<=mid) {
+            ans[k++]=arr[i++];
+        }
+        while (j<=high) {
+            ans[k++]=arr[j++];
+        }
+
+        for (int a = low; a <= high; a++) {
+            arr[a] = ans[a -low];
+        }
+
+    }
+    // Quick Sort
+    public static void quickSort(int arr[], int low, int high) {
+        if (low<high) {
+            int pi=partition(arr, low, high);
+            quickSort(arr, low, pi-1);
+            quickSort(arr, pi+1, high);
         }
     }
 
-    public static void merge(int arr[], int low, int mid, int high) {
-        int helper[] = new int[high - low + 1];
-        for (int i = 0; i < arr.length; i++) {
-            helper[i] = arr[i];
+
+    public static int partition(int arr[], int low, int high) {
+        int j=high;
+        int i=low+1;
+        int pivot=arr[low];
+        while (i<=j) {
+            while (i<=j && arr[i]<=pivot) {
+                i++;
+            }
+            while (i<=j && arr[j]>pivot) {
+                j--;
+            }
+            if (i<j) {
+               int temp=arr[i];
+               arr[i]=arr[j];
+               arr[j]=temp; 
+            }
         }
-
-        int i = low;
-        int j = mid + 1;
-        int k = low;
-
+        int temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
+        return j;
     }
+
 
     public void printArray(int arr[]) {
         for (int i = 0; i < arr.length; i++) {
@@ -227,10 +264,10 @@ public class Array {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 5, 3, 2, 6, 4, 7, 9, 4 };
-        quickSort(arr, 0, arr.length - 1);
-        for (int p : arr) {
-            System.out.print(p+" ");
+        int arr[] = { 5,4,3,2,1};
+        recursiveBubbleSort(arr, arr.length);
+        for (int i : arr) {
+            System.out.print(i+" ");
         }
     }
 }
