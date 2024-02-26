@@ -21,16 +21,17 @@ public class Array {
         }
     }
 
-    //Recursisve Insertion sort
-    public static void recursiveInsertion(int arr[], int i){
-        if (i == arr.length) return;
-        int key=arr[i];
-        int j = i-1;
+    // Recursisve Insertion sort
+    public static void recursiveInsertion(int arr[], int i) {
+        if (i == arr.length)
+            return;
+        int key = arr[i];
+        int j = i - 1;
         while (j >= 0 && arr[j] > key) {
-            arr[j +1] = arr[j];
+            arr[j + 1] = arr[j];
             j--;
         }
-        arr[j+1]=key;
+        arr[j + 1] = key;
         recursiveInsertion(arr, i + 1);
     }
 
@@ -73,82 +74,83 @@ public class Array {
         }
     }
 
-    public static void recursiveBubbleSort(int arr[],int n){
-        if (n==1) {
+    public static void recursiveBubbleSort(int arr[], int n) {
+        if (n == 1) {
             return;
         }
-        for (int i = 0; i < arr.length-1; i++) {
-            if (arr[i]>arr[i+1]) {
-                int temp=arr[i];
-                arr[i]=arr[i+1];
-                arr[i+1]=temp;
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
             }
         }
-        recursiveBubbleSort(arr,n-1);
+        recursiveBubbleSort(arr, n - 1);
     }
 
-     //Merge sort
-     public static void devide(int arr[],int low,int high) {
-        if (low<high) {
-            int mid= low + (high-low)/2;
+    // Merge sort
+    public static void devide(int arr[], int low, int high) {
+        if (low < high) {
+            int mid = low + (high - low) / 2;
             devide(arr, low, mid);
-            devide(arr, mid+1, high);
+            devide(arr, mid + 1, high);
             conquer(arr, low, mid, high);
         }
     }
-    public static void conquer(int arr[],int low, int mid,int high) {
-        int ans[]=new int[high-low+1];
-        int k=0;
-        int i=low;
-        int j=mid+1;
-        while (i<=mid && j<=high) {
-            if (arr[i]<=arr[j]) {
-                ans[k]=arr[i];
+
+    public static void conquer(int arr[], int low, int mid, int high) {
+        int ans[] = new int[high - low + 1];
+        int k = 0;
+        int i = low;
+        int j = mid + 1;
+        while (i <= mid && j <= high) {
+            if (arr[i] <= arr[j]) {
+                ans[k] = arr[i];
                 k++;
                 i++;
-            }else{
-                ans[k]=arr[j];
+            } else {
+                ans[k] = arr[j];
                 k++;
                 j++;
             }
         }
-        while (i<=mid) {
-            ans[k++]=arr[i++];
+        while (i <= mid) {
+            ans[k++] = arr[i++];
         }
-        while (j<=high) {
-            ans[k++]=arr[j++];
+        while (j <= high) {
+            ans[k++] = arr[j++];
         }
 
         for (int a = low; a <= high; a++) {
-            arr[a] = ans[a -low];
+            arr[a] = ans[a - low];
         }
 
     }
+
     // Quick Sort
     public static void quickSort(int arr[], int low, int high) {
-        if (low<high) {
-            int pi=partition(arr, low, high);
-            quickSort(arr, low, pi-1);
-            quickSort(arr, pi+1, high);
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
         }
     }
 
-
     public static int partition(int arr[], int low, int high) {
-        int j=high;
-        int i=low+1;
-        int pivot=arr[low];
-        while (i<=j) {
-            while (i<=j && arr[i]<=pivot) {
+        int j = high;
+        int i = low + 1;
+        int pivot = arr[low];
+        while (i <= j) {
+            while (i <= j && arr[i] <= pivot) {
                 i++;
             }
-            while (i<=j && arr[j]>pivot) {
+            while (i <= j && arr[j] > pivot) {
                 j--;
             }
-            if (i<j) {
-               int temp=arr[i];
-               arr[i]=arr[j];
-               arr[j]=temp; 
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
         int temp = arr[low];
@@ -156,7 +158,6 @@ public class Array {
         arr[j] = temp;
         return j;
     }
-
 
     public void printArray(int arr[]) {
         for (int i = 0; i < arr.length; i++) {
@@ -274,11 +275,25 @@ public class Array {
         return flag;
     }
 
-    public static void main(String[] args) {
-        int arr[] = { 5,4,3,2,1};
-        recursiveInsertion(arr, 1);
-        for (int i : arr) {
+    // Given an integer array nums, rotate the array to the right by k steps, where
+    // k is non-negative.
+    public static void rotateByk(int nums[], int k) {
+        int temp[]=new int[nums.length];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i]=nums[i];
+        }
+        
+        for (int i = 0; i < temp.length; i++) {
+            nums[(i+k)%nums.length]=temp[i];
+        }
+        for (int i : nums) {
             System.out.print(i+" ");
         }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = { 1,2,3,4,5,6,7 };
+        rotateByk(arr, 3);
+        
     }
 }
