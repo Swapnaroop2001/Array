@@ -278,22 +278,38 @@ public class Array {
     // Given an integer array nums, rotate the array to the right by k steps, where
     // k is non-negative.
     public static void rotateByk(int nums[], int k) {
-        int temp[]=new int[nums.length];
+        int temp[] = new int[nums.length];
         for (int i = 0; i < temp.length; i++) {
-            temp[i]=nums[i];
+            temp[i] = nums[i];
         }
-        
+
         for (int i = 0; i < temp.length; i++) {
-            nums[(i+k)%nums.length]=temp[i];
+            nums[(i + k) % nums.length] = temp[i];
         }
         for (int i : nums) {
-            System.out.print(i+" ");
+            System.out.print(i + " ");
         }
     }
 
+    public static int[] zigZag(int[] numbers) {
+        int ans[] = new int[numbers.length - 2];
+        for (int i = 0; i < numbers.length - 2; i++) {
+            if (numbers[i] < numbers[i + 1] && numbers[i + 1] > numbers[i + 2]) {
+                ans[i] = 1;
+            } else if (numbers[i] > numbers[i + 1] && numbers[i + 1] < numbers[i + 2]) {
+                ans[i] = 1;
+            } else {
+                ans[i] = 0;
+            }
+        }
+        return ans;
+    }
+
+    
+
     public static void main(String[] args) {
-        int arr[] = { 1,2,3,4,5,6,7 };
-        rotateByk(arr, 3);
-        
+        int arr[] = { 1, 2, 1, 3, 4 };
+
+
     }
 }
