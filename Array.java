@@ -1,5 +1,6 @@
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Array
@@ -334,6 +335,23 @@ public class Array {
         }
     }
 
+    //Union of arrays
+    public static void findUnioun(int arr1[], int arr2[]) {
+        HashSet<Integer> Set1 = new HashSet<>();
+        for (int i = 0; i < arr1.length; i++) {
+            Set1.add(arr1[i]);
+        }
+        for (int i = 0; i < arr2.length; i++) {
+            if (!Set1.contains(arr2[i])) {
+                Set1.add(arr2[i]);
+            }
+        }
+
+        for (Integer integer : Set1) {
+            System.out.print(integer+" ");
+        }
+    }
+
     // Intersection of two arrays
     public static void findIntersection(int arr1[], int arr2[]) {
         HashSet<Integer> Set1 = new HashSet<>();
@@ -351,9 +369,10 @@ public class Array {
         }
     }
 
+
     public static void main(String[] args) {
-        int arr1[] = { 1, 3, 7, 2, 4, 5 };
+        int arr1[] = { 1, 3, 7, 2, 4, 5,3,10};
         int arr2[] = { 1, 4, 5, 2, 9 };
-        findIntersection(arr1, arr2);
+        findUnioun(arr1, arr2);
     }
 }
