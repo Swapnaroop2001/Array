@@ -1,4 +1,6 @@
 
+import java.util.HashSet;
+
 /**
  * Array
  */
@@ -291,6 +293,7 @@ public class Array {
         }
     }
 
+    //
     public static int[] zigZag(int[] numbers) {
         int ans[] = new int[numbers.length - 2];
         for (int i = 0; i < numbers.length - 2; i++) {
@@ -305,11 +308,52 @@ public class Array {
         return ans;
     }
 
-    
+    public static void moveZeros(int arr[]) {
+        int j = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                j = i;
+                break;
+            }
+        }
+        if (j == -1) {
+            return;
+        }
+
+        for (int i = j + 1; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                j++;
+            }
+        }
+
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+    }
+
+    // Intersection of two arrays
+    public static void findIntersection(int arr1[], int arr2[]) {
+        HashSet<Integer> Set1 = new HashSet<>();
+        for (int i = 0; i < arr1.length; i++) {
+            Set1.add(arr1[i]);
+        }
+        HashSet<Integer> Set2 = new HashSet<>();
+        for (int i = 0; i < arr2.length; i++) {
+            if (Set1.contains(arr2[i])) {
+                Set2.add(arr2[i]);
+            }
+        }
+        for (Integer integer : Set2) {
+            System.out.print(integer+" ");
+        }
+    }
 
     public static void main(String[] args) {
-        int arr[] = { 1, 2, 1, 3, 4 };
-
-
+        int arr1[] = { 1, 3, 7, 2, 4, 5 };
+        int arr2[] = { 1, 4, 5, 2, 9 };
+        findIntersection(arr1, arr2);
     }
 }
