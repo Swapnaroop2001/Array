@@ -335,7 +335,7 @@ public class Array {
         }
     }
 
-    //Union of arrays
+    // Union of arrays
     public static void findUnioun(int arr1[], int arr2[]) {
         HashSet<Integer> Set1 = new HashSet<>();
         for (int i = 0; i < arr1.length; i++) {
@@ -348,7 +348,7 @@ public class Array {
         }
 
         for (Integer integer : Set1) {
-            System.out.print(integer+" ");
+            System.out.print(integer + " ");
         }
     }
 
@@ -365,14 +365,47 @@ public class Array {
             }
         }
         for (Integer integer : Set2) {
-            System.out.print(integer+" ");
+            System.out.print(integer + " ");
         }
     }
 
+    // Max Consecutive ones
+    public static int findMaxConsecutiveOnes(int[] nums) {
+        int max = 0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                count++;
+            } else {
+                if (max < count) {
+                    max = count;
+                }
+                count = 0;
+            }
+
+        }
+        if (nums[nums.length - 1] == 1) {
+            if (max < count) {
+                max = count;
+            }
+        }
+        return max;
+
+    }
+
+    // Missing Number
+    public int missingNumber(int[] nums) {
+        int sum= nums.length*(nums.length+1)/2;
+        int sum2=0;
+        for (int i = 0; i < nums.length; i++) {
+            sum=sum+nums[i];
+        }
+        return sum-sum2;
+    }
 
     public static void main(String[] args) {
-        int arr1[] = { 1, 3, 7, 2, 4, 5,3,10};
-        int arr2[] = { 1, 4, 5, 2, 9 };
-        findUnioun(arr1, arr2);
+        int arr1[] = { 1, 3, 7, 2, 4, 5, 3, 10 };
+        int arr2[] = { 1, 1, 0, 1, 1, 1 };
+        System.out.println(findMaxConsecutiveOnes(arr2));
     }
 }
