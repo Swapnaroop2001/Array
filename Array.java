@@ -468,9 +468,43 @@ public class Array {
                 return count;
             }
         }
-
         return -1;
     }
+
+    //Better approach  for majority element.
+    public int majorityElement2(int[] nums) {
+        Map <Integer,Integer> map=new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i],map.getOrDefault(nums[i], 0)+1);
+        }
+        for (Map.Entry<Integer, Integer> it : map.entrySet()) {
+            if (it.getValue() > (nums.length / 2)) {
+                return it.getKey();
+            }
+        }
+        return -1;
+    }
+
+    //Optimal approach for Majority element.
+    public int majorityElement3(int[] nums) {
+        return major(nums, nums[0],0);
+    }
+    public int major(int[] nums, int elem, int i) {
+        int count=0;
+        for (int j = i; j < nums.length; j++) {
+            if (elem==nums[i]) {
+                count++;
+            }
+            else{
+                count--;
+            }
+            if (count<0) {
+                return major(nums, nums[j], j);
+            }
+        }
+        return elem;
+    }
+
 
     // Longes subarray with sum k
     public static int getLongestSubarray(int []nums, int k) {
@@ -502,8 +536,9 @@ public class Array {
         return count;
     }
 
+    
+
     public static void main(String[] args) {
-        int arr1[] = { 1, 3, 7, 2, 4, 5, 3, 10 };
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
         System.out.println(singleNumber(arr2));
     }
