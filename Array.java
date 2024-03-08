@@ -487,7 +487,20 @@ public class Array {
         return length;
 	}
 
-   
+    //Return number of subarrays with sum k;
+    public int subarraySum(int[] nums, int k) {
+        int count=0;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum = sum + nums[j];
+                if (sum == k) {
+                    count=count+1;
+                }
+            }
+        }
+        return count;
+    }
 
     public static void main(String[] args) {
         int arr1[] = { 1, 3, 7, 2, 4, 5, 3, 10 };
