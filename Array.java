@@ -1,6 +1,7 @@
 
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Array
@@ -395,17 +396,102 @@ public class Array {
 
     // Missing Number
     public int missingNumber(int[] nums) {
-        int sum= nums.length*(nums.length+1)/2;
-        int sum2=0;
+        int sum = nums.length * (nums.length + 1) / 2;
+        int sum2 = 0;
         for (int i = 0; i < nums.length; i++) {
-            sum=sum+nums[i];
+            sum = sum + nums[i];
         }
-        return sum-sum2;
+        return sum - sum2;
     }
+
+    // Given a non-empty array of integers nums, every element appears twice except
+    // for one. Find that single one.
+    public static int singleNumber(int[] nums) {
+        int k = 0;
+        for (int i = 0; i < nums.length; i++) {
+            k = k ^ nums[i];
+        }
+        return k;
+    }
+
+    // twoSum
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+            if (!map.containsKey(target - nums[i])) {
+                continue;
+            } else {
+                return new int[] { i, map.get(target - nums[i]) };
+            }
+        }
+        return new int[] { -1, -1 };
+    }
+
+    // Sort array of 0's, 1's & 2's.
+    public void sortColors(int[] nums) {
+        int low = 0;
+        int mid = 0;
+        int high = nums.length - 1;
+        while (low <= high) {
+            if (nums[mid] == 0) {
+                int temp = nums[low];
+                nums[low] = nums[mid];
+                nums[mid] = temp;
+                low++;
+                mid++;
+            } else if (nums[mid] == 1) {
+                mid++;
+            } else {
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                high--;
+                mid++;
+            }
+        }
+    }
+
+    // Majority element
+    // Given an array nums of size n, return the majority element.The majority
+    // element is the element that appears more than ⌊n / 2⌋ times.
+    // BruteForce
+    public int majorityElement(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int count = 0;
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    count++;
+                }
+            }
+            if (count >= nums.length / 2) {
+                return count;
+            }
+        }
+
+        return -1;
+    }
+
+    // Longes subarray with sum k
+    public static int getLongestSubarray(int []nums, int k) {
+		int length=0;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum = sum + nums[j];
+                if (sum == k) {
+                    length=Math.max(j-i+1, length);
+                }
+            }
+        }
+        return length;
+	}
+
+   
 
     public static void main(String[] args) {
         int arr1[] = { 1, 3, 7, 2, 4, 5, 3, 10 };
-        int arr2[] = { 1, 1, 0, 1, 1, 1 };
-        System.out.println(findMaxConsecutiveOnes(arr2));
+        int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
+        System.out.println(singleNumber(arr2));
     }
 }
