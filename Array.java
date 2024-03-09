@@ -471,11 +471,11 @@ public class Array {
         return -1;
     }
 
-    //Better approach  for majority element.
+    // Better approach for majority element.
     public int majorityElement2(int[] nums) {
-        Map <Integer,Integer> map=new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i],map.getOrDefault(nums[i], 0)+1);
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
         for (Map.Entry<Integer, Integer> it : map.entrySet()) {
             if (it.getValue() > (nums.length / 2)) {
@@ -485,58 +485,72 @@ public class Array {
         return -1;
     }
 
-    //Optimal approach for Majority element.
+    // Optimal approach for Majority element.
     public int majorityElement3(int[] nums) {
-        return major(nums, nums[0],0);
+        return major(nums, nums[0], 0);
     }
+
     public int major(int[] nums, int elem, int i) {
-        int count=0;
+        int count = 0;
         for (int j = i; j < nums.length; j++) {
-            if (elem==nums[i]) {
+            if (elem == nums[i]) {
                 count++;
-            }
-            else{
+            } else {
                 count--;
             }
-            if (count<0) {
+            if (count < 0) {
                 return major(nums, nums[j], j);
             }
         }
         return elem;
     }
 
+    // Given an integer array nums, find the subarray with the largest sum, and
+    // return its sum.
+    public int maxSubArray(int[] nums) {
+        int sum=0;
+        int max=nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            sum=sum+nums[i];
+            if (max<sum) {
+                max=sum;
+            }
+            if (sum<0) {
+                sum=0;
+            }
+        }
+        return max;
+    }
 
-    // Longes subarray with sum k
-    public static int getLongestSubarray(int []nums, int k) {
-		int length=0;
+    // Longest subarray with sum k
+    public static int getLongestSubarray(int[] nums, int k) {
+        int length = 0;
         for (int i = 0; i < nums.length; i++) {
             int sum = 0;
             for (int j = i; j < nums.length; j++) {
                 sum = sum + nums[j];
                 if (sum == k) {
-                    length=Math.max(j-i+1, length);
+                    length = Math.max(j - i + 1, length);
                 }
             }
         }
         return length;
-	}
+    }
 
-    //Return number of subarrays with sum k;
+    // Return number of subarrays with sum k;
     public int subarraySum(int[] nums, int k) {
-        int count=0;
+        int count = 0;
         for (int i = 0; i < nums.length; i++) {
             int sum = 0;
             for (int j = i; j < nums.length; j++) {
                 sum = sum + nums[j];
                 if (sum == k) {
-                    count=count+1;
+                    count = count + 1;
                 }
             }
         }
         return count;
     }
-
-    
 
     public static void main(String[] args) {
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
