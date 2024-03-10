@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -552,8 +553,90 @@ public class Array {
         return count;
     }
 
+    // Best Time to Buy and Sell Stock : Brute Force
+    public int maxProfit(int[] prices) {
+        int profit=0;
+        int maxProfit=0;
+        for (int i = prices.length-1 ; i >=1; i--) {
+            for (int j = i-1; j >= 0; j--) {
+                profit=prices[i]-prices[j];
+                if(profit>maxProfit){
+                    maxProfit=profit;
+                }
+            }
+        }
+        return maxProfit;
+    }
+
+    //Best Time to Buy and Sell Stock: Optimal solution
+    public static int maxProfit2(int[] prices) {
+        int min=prices[0];
+        int maxProfit=0;
+        for (int i = 0; i < prices.length; i++) {
+            maxProfit=Math.max(maxProfit, prices[i]-min);
+            min=Math.min(min,prices[i]);
+        }
+        return maxProfit;
+    }
+
+    //Rearrange elements by sign
+    public int[] rearrangeArray(int[] nums) {
+        ArrayList <Integer> pos=new ArrayList<>();
+        ArrayList <Integer> neg=new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]>0) {
+                pos.add(nums[i]);
+            }
+            else{
+                neg.add(nums[i]);
+            }
+        }
+
+        if (pos.size()>neg.size()) {
+            for (int i = 0; i < neg.size(); i++) {
+                nums[i*2]=pos.get(i);
+                nums[(i*2)+1]=neg.get(i);
+            }
+            int k=neg.size()*2;
+            for (int i = neg.size()-1; i <pos.size() ; i++) {
+                nums[k]=pos.get(i);
+            }
+        }else{
+            for (int i = 0; i < pos.size(); i++) {
+                nums[i*2]=pos.get(i);
+                nums[(i*2)+1]=neg.get(i);
+            }
+            int k=pos.size()*2;
+            for (int i = pos.size()-1; i <neg.size() ; i++) {
+                nums[k]=neg.get(i);
+            }
+        }
+
+        return nums;
+        
+    }
+
+    //Rearrange elements by sign : Optimal
+    public int[] rearrangeArray2(int[] nums) {
+        int answer[]= new int[nums.length];
+        int i=0,j=1;
+        for(int k=0;k<nums.length;k++) {
+            if (nums[k]>0) {
+                answer[i]=nums[k];
+                i+=2;
+            }
+            else{
+                answer[j]=nums[k];
+                j+=2;
+            }
+        }
+        return answer;
+    }
+
+    
+
     public static void main(String[] args) {
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
-        System.out.println(singleNumber(arr2));
+        System.out.println(maxProfit2(arr2));
     }
 }
