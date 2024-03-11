@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -631,6 +632,61 @@ public class Array {
             }
         }
         return answer;
+    }
+
+    //Next permutation.
+    public void nextPermutation(int[] nums) {
+
+        // Step 1
+        int index=-1;
+        for (int i = nums.length-2; i>=0; i--) {
+            if (nums[i]<nums[i+1]) {
+                index=i;
+                break;
+            }
+        }
+        if (index==-1) {
+            for (int i = 0; i <=Math.floor(nums.length/2); i++) {
+                int temp=nums[i];
+                nums[i]=nums[nums.length-1-i];
+                nums[nums.length-1-i]=temp;
+            }
+            return;
+        }
+
+        // Step 2
+        for (int i = nums.length-1; i> index; i--) {
+            if (nums[i]>nums[index]) {
+                int temp=nums[i];
+                nums[i]=nums[index];
+                nums[index]=temp;
+                break;
+            }
+        }
+
+        // Step 3
+        for (int i = nums.length-1; i >index; i--) {
+            int temp=nums[i];
+            nums[i]=nums[nums.length-1-i];
+            nums[nums.length-1-i]=temp;
+        }
+
+        return;
+    }
+
+    //1299. Replace Elements with Greatest Element on Right Side
+    public int[] replaceElements(int[] arr) {
+        int maximum=-1;
+        for (int i = arr.length-1; i>=0; i++) {
+            if (arr[i]>maximum) {
+                int temp=arr[i];
+                arr[i]=maximum;
+                maximum=temp;
+            } else {
+                arr[i]=maximum;
+            }
+        }
+        return arr;
     }
 
     
