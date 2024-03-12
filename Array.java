@@ -689,6 +689,30 @@ public class Array {
         return arr;
     }
 
+    //Set matrix Zero
+    public void setZeroes(int[][] matrix) {
+        int row=0;
+        int col=0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j]==0) {
+                    row=i;
+                    col=j;
+                }
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (i==row) {
+                    matrix[i][j]=0;
+                }
+                if (j==col) {
+                    matrix[i][j]=0;
+                }
+            }
+        }
+    }
+
     
 
     public static void main(String[] args) {
