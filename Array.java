@@ -713,6 +713,16 @@ public class Array {
         }
     }
 
+    // Rotate Matrix by 90 degree.
+    public static void rotateMatrix(ArrayList<ArrayList<Integer>> mat, int n, int m) {
+        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        for (int i = 0; i < mat.size(); i++) {
+            for (int j = 0; j < mat.size(); j++) {
+              ans.add(n-1-i, mat.get(mat.get(j)));
+            }
+        }
+    }
+
     
 
     public static void main(String[] args) {
