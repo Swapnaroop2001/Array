@@ -714,14 +714,25 @@ public class Array {
     }
 
     // Rotate Matrix by 90 degree.
-    public static void rotateMatrix(ArrayList<ArrayList<Integer>> mat, int n, int m) {
-        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
-        for (int i = 0; i < mat.size(); i++) {
-            for (int j = 0; j < mat.size(); j++) {
-              ans.add(n-1-i, mat.get(mat.get(j)));
+    public void rotate(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = i; j < matrix[0].length; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length / 2; j++) {
+                int temp = 0;
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix.length - 1 - j];
+                matrix[i][matrix.length - 1 - j] = temp;
             }
         }
     }
+
+
 
     
 
