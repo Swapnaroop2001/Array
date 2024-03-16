@@ -1,10 +1,13 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Array
@@ -763,6 +766,52 @@ public class Array {
             }}
             left++;
         }
+        return ans;
+    }
+
+
+    //3 sum : Brute Force
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        for (int i = 0; i < nums.length-2; i++) {
+            for (int j =i+1; j < nums.length-1; j++) {
+                for (int j2 =j+1; j2 < nums.length; j2++) {
+                    if (nums[i]+nums[j]+nums[j2]==0) {
+                        List<Integer> triplet= new ArrayList<>();
+                        triplet.add(nums[i]);
+                        triplet.add(nums[j]);
+                        triplet.add(nums[j2]);
+                        Collections.sort(triplet);
+                        if (!ans.contains(triplet)) {
+                            ans.add(triplet);
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+
+    //3 sum : Better
+    public List<List<Integer>> threeSum2(int[] nums) {
+        Set<List<Integer>> st = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            Set<Integer> hashset = new HashSet<>();
+            for (int j = i + 1; j < nums.length; j++) {
+                //Calculate the 3rd element:
+                int third = -(nums[i] + nums[j]);
+
+                //Find the element in the set:
+                if (hashset.contains(third)) {
+                    List<Integer> temp = Arrays.asList(nums[i], nums[j], third);
+                    temp.sort(null);
+                    st.add(temp);
+                }
+                hashset.add(nums[j]);
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>(st);
         return ans;
     }
 
