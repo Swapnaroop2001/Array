@@ -514,15 +514,15 @@ public class Array {
     // Given an integer array nums, find the subarray with the largest sum, and
     // return its sum.
     public int maxSubArray(int[] nums) {
-        int sum=0;
-        int max=nums[0];
+        int sum = 0;
+        int max = nums[0];
         for (int i = 0; i < nums.length; i++) {
-            sum=sum+nums[i];
-            if (max<sum) {
-                max=sum;
+            sum = sum + nums[i];
+            if (max < sum) {
+                max = sum;
             }
-            if (sum<0) {
-                sum=0;
+            if (sum < 0) {
+                sum = 0;
             }
         }
         return max;
@@ -560,158 +560,156 @@ public class Array {
 
     // Best Time to Buy and Sell Stock : Brute Force
     public int maxProfit(int[] prices) {
-        int profit=0;
-        int maxProfit=0;
-        for (int i = prices.length-1 ; i >=1; i--) {
-            for (int j = i-1; j >= 0; j--) {
-                profit=prices[i]-prices[j];
-                if(profit>maxProfit){
-                    maxProfit=profit;
+        int profit = 0;
+        int maxProfit = 0;
+        for (int i = prices.length - 1; i >= 1; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                profit = prices[i] - prices[j];
+                if (profit > maxProfit) {
+                    maxProfit = profit;
                 }
             }
         }
         return maxProfit;
     }
 
-    //Best Time to Buy and Sell Stock: Optimal solution
+    // Best Time to Buy and Sell Stock: Optimal solution
     public static int maxProfit2(int[] prices) {
-        int min=prices[0];
-        int maxProfit=0;
+        int min = prices[0];
+        int maxProfit = 0;
         for (int i = 0; i < prices.length; i++) {
-            maxProfit=Math.max(maxProfit, prices[i]-min);
-            min=Math.min(min,prices[i]);
+            maxProfit = Math.max(maxProfit, prices[i] - min);
+            min = Math.min(min, prices[i]);
         }
         return maxProfit;
     }
 
-    //Rearrange elements by sign
+    // Rearrange elements by sign
     public int[] rearrangeArray(int[] nums) {
-        ArrayList <Integer> pos=new ArrayList<>();
-        ArrayList <Integer> neg=new ArrayList<>();
+        ArrayList<Integer> pos = new ArrayList<>();
+        ArrayList<Integer> neg = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i]>0) {
+            if (nums[i] > 0) {
                 pos.add(nums[i]);
-            }
-            else{
+            } else {
                 neg.add(nums[i]);
             }
         }
 
-        if (pos.size()>neg.size()) {
+        if (pos.size() > neg.size()) {
             for (int i = 0; i < neg.size(); i++) {
-                nums[i*2]=pos.get(i);
-                nums[(i*2)+1]=neg.get(i);
+                nums[i * 2] = pos.get(i);
+                nums[(i * 2) + 1] = neg.get(i);
             }
-            int k=neg.size()*2;
-            for (int i = neg.size()-1; i <pos.size() ; i++) {
-                nums[k]=pos.get(i);
+            int k = neg.size() * 2;
+            for (int i = neg.size() - 1; i < pos.size(); i++) {
+                nums[k] = pos.get(i);
             }
-        }else{
+        } else {
             for (int i = 0; i < pos.size(); i++) {
-                nums[i*2]=pos.get(i);
-                nums[(i*2)+1]=neg.get(i);
+                nums[i * 2] = pos.get(i);
+                nums[(i * 2) + 1] = neg.get(i);
             }
-            int k=pos.size()*2;
-            for (int i = pos.size()-1; i <neg.size() ; i++) {
-                nums[k]=neg.get(i);
+            int k = pos.size() * 2;
+            for (int i = pos.size() - 1; i < neg.size(); i++) {
+                nums[k] = neg.get(i);
             }
         }
 
         return nums;
-        
+
     }
 
-    //Rearrange elements by sign : Optimal
+    // Rearrange elements by sign : Optimal
     public int[] rearrangeArray2(int[] nums) {
-        int answer[]= new int[nums.length];
-        int i=0,j=1;
-        for(int k=0;k<nums.length;k++) {
-            if (nums[k]>0) {
-                answer[i]=nums[k];
-                i+=2;
-            }
-            else{
-                answer[j]=nums[k];
-                j+=2;
+        int answer[] = new int[nums.length];
+        int i = 0, j = 1;
+        for (int k = 0; k < nums.length; k++) {
+            if (nums[k] > 0) {
+                answer[i] = nums[k];
+                i += 2;
+            } else {
+                answer[j] = nums[k];
+                j += 2;
             }
         }
         return answer;
     }
 
-    //Next permutation.
+    // Next permutation.
     public void nextPermutation(int[] nums) {
 
         // Step 1
-        int index=-1;
-        for (int i = nums.length-2; i>=0; i--) {
-            if (nums[i]<nums[i+1]) {
-                index=i;
+        int index = -1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                index = i;
                 break;
             }
         }
-        if (index==-1) {
-            for (int i = 0; i <=Math.floor(nums.length/2); i++) {
-                int temp=nums[i];
-                nums[i]=nums[nums.length-1-i];
-                nums[nums.length-1-i]=temp;
+        if (index == -1) {
+            for (int i = 0; i <= Math.floor(nums.length / 2); i++) {
+                int temp = nums[i];
+                nums[i] = nums[nums.length - 1 - i];
+                nums[nums.length - 1 - i] = temp;
             }
             return;
         }
 
         // Step 2
-        for (int i = nums.length-1; i> index; i--) {
-            if (nums[i]>nums[index]) {
-                int temp=nums[i];
-                nums[i]=nums[index];
-                nums[index]=temp;
+        for (int i = nums.length - 1; i > index; i--) {
+            if (nums[i] > nums[index]) {
+                int temp = nums[i];
+                nums[i] = nums[index];
+                nums[index] = temp;
                 break;
             }
         }
 
         // Step 3
-        for (int i = nums.length-1; i >index; i--) {
-            int temp=nums[i];
-            nums[i]=nums[nums.length-1-i];
-            nums[nums.length-1-i]=temp;
+        for (int i = nums.length - 1; i > index; i--) {
+            int temp = nums[i];
+            nums[i] = nums[nums.length - 1 - i];
+            nums[nums.length - 1 - i] = temp;
         }
 
         return;
     }
 
-    //1299. Replace Elements with Greatest Element on Right Side
+    // 1299. Replace Elements with Greatest Element on Right Side
     public int[] replaceElements(int[] arr) {
-        int maximum=-1;
-        for (int i = arr.length-1; i>=0; i++) {
-            if (arr[i]>maximum) {
-                int temp=arr[i];
-                arr[i]=maximum;
-                maximum=temp;
+        int maximum = -1;
+        for (int i = arr.length - 1; i >= 0; i++) {
+            if (arr[i] > maximum) {
+                int temp = arr[i];
+                arr[i] = maximum;
+                maximum = temp;
             } else {
-                arr[i]=maximum;
+                arr[i] = maximum;
             }
         }
         return arr;
     }
 
-    //Set matrix Zero
+    // Set matrix Zero
     public void setZeroes(int[][] matrix) {
-        int row=0;
-        int col=0;
+        int row = 0;
+        int col = 0;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j]==0) {
-                    row=i;
-                    col=j;
+                if (matrix[i][j] == 0) {
+                    row = i;
+                    col = j;
                 }
             }
         }
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                if (i==row) {
-                    matrix[i][j]=0;
+                if (i == row) {
+                    matrix[i][j] = 0;
                 }
-                if (j==col) {
-                    matrix[i][j]=0;
+                if (j == col) {
+                    matrix[i][j] = 0;
                 }
             }
         }
@@ -736,15 +734,15 @@ public class Array {
         }
     }
 
-
-    //Spiral Matrix: Given an m x n matrix, return all elements of the matrix in spiral order.
+    // Spiral Matrix: Given an m x n matrix, return all elements of the matrix in
+    // spiral order.
     public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> ans= new ArrayList<>();
-        int left=0;
-        int right =matrix[0].length-1;
-        int top=0;
-        int bottom=matrix.length-1;
-        while(left<=right && top<=bottom){
+        List<Integer> ans = new ArrayList<>();
+        int left = 0;
+        int right = matrix[0].length - 1;
+        int top = 0;
+        int bottom = matrix.length - 1;
+        while (left <= right && top <= bottom) {
             for (int i = left; i <= right; i++) {
                 ans.add(matrix[top][i]);
             }
@@ -755,29 +753,30 @@ public class Array {
             right--;
 
             if (top <= bottom) {
-            for (int i = right; i>= left; i--) {
-                ans.add(matrix[bottom][i]);
-            }}
+                for (int i = right; i >= left; i--) {
+                    ans.add(matrix[bottom][i]);
+                }
+            }
             bottom--;
 
             if (left <= right) {
-            for (int i = bottom; i>=top ; i--) {
-                ans.add(matrix[i][left]);
-            }}
+                for (int i = bottom; i >= top; i--) {
+                    ans.add(matrix[i][left]);
+                }
+            }
             left++;
         }
         return ans;
     }
 
-
-    //3 sum : Brute Force
+    // 3 sum : Brute Force
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> ans=new ArrayList<>();
-        for (int i = 0; i < nums.length-2; i++) {
-            for (int j =i+1; j < nums.length-1; j++) {
-                for (int j2 =j+1; j2 < nums.length; j2++) {
-                    if (nums[i]+nums[j]+nums[j2]==0) {
-                        List<Integer> triplet= new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < nums.length - 2; i++) {
+            for (int j = i + 1; j < nums.length - 1; j++) {
+                for (int j2 = j + 1; j2 < nums.length; j2++) {
+                    if (nums[i] + nums[j] + nums[j2] == 0) {
+                        List<Integer> triplet = new ArrayList<>();
                         triplet.add(nums[i]);
                         triplet.add(nums[j]);
                         triplet.add(nums[j2]);
@@ -792,17 +791,17 @@ public class Array {
         return ans;
     }
 
-    //3 sum : Better
+    // 3 sum : Better
     public List<List<Integer>> threeSum2(int[] nums) {
         Set<List<Integer>> st = new HashSet<>();
 
         for (int i = 0; i < nums.length; i++) {
             Set<Integer> hashset = new HashSet<>();
             for (int j = i + 1; j < nums.length; j++) {
-                //Calculate the 3rd element:
+                // Calculate the 3rd element:
                 int third = -(nums[i] + nums[j]);
 
-                //Find the element in the set:
+                // Find the element in the set:
                 if (hashset.contains(third)) {
                     List<Integer> temp = Arrays.asList(nums[i], nums[j], third);
                     temp.sort(null);
@@ -815,8 +814,35 @@ public class Array {
         return ans;
     }
 
+    // 3Sum : Optimal
+    public List<List<Integer>> threeSum3(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] > nums[i - 1]) continue;
+            int left = i + 1;
+            int right = nums.length - 1;
 
-    
+            while (left < right) {
+                int sum=nums[i]+nums[left]+nums[right];
+                if (sum<0) {
+                    left++;
+                }else if(sum>0){
+                    right--;
+                }else{
+                    List<Integer> triplet = Arrays.asList(nums[i], nums[left], nums[right]);
+                    ans.add(triplet);
+                    left++;
+                    right--;
+                    while (left<right && nums[left]==nums[left-1]) left++;
+                    while (left<right && nums[right]==nums[right+1]) right--;
+                }
+
+            }
+
+        }
+        return ans;
+    }
 
     public static void main(String[] args) {
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
