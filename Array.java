@@ -889,6 +889,29 @@ public class Array {
         return ans;
     }
 
+
+    //Pascles Triangle 
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans=new ArrayList<>();
+        for (int i = 1; i <= numRows; i++) {
+            ans.add(generateRow(i));
+        }
+        return ans;
+    }
+    public List<Integer> generateRow(int n) {
+        List <Integer> row=new ArrayList<>();
+        long k=1;
+        row.add(1);
+        for (int col = 1; col< n; col++) {
+            k=k*(n-col);
+            k=k/col;
+            row.add((int)k);
+        }
+        return row;
+    }
+
+    
+    
     public static void main(String[] args) {
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
         System.out.println(maxProfit2(arr2));
