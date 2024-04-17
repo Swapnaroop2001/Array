@@ -919,6 +919,21 @@ public class Array {
         Arrays.sort(nums1);
     }
 
+    //152. Maximum Product Subarray
+    public int maxProduct(int[] nums) {
+        int prefix=1, suffix=1;
+        int ans=Integer.MIN_VALUE;
+        int n=nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            if (prefix==0) prefix=1;
+            if (suffix==0) suffix=1;
+            prefix=prefix * nums[i];
+            suffix=suffix * nums[n-i-1];
+            ans= Math.max(ans,Math.max(prefix, suffix));
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
         System.out.println(maxProfit2(arr2));
