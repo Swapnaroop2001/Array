@@ -934,6 +934,20 @@ public class Array {
         return ans;
     }
 
+    // 66. Plus One
+    public int[] plusOne(int[] digits) {
+        int n=digits.length-1;
+        int last=digits[n];
+        if (last==9) {
+            return new int[]{1,0};
+        }
+        else{
+            last=last+1;
+            digits[n]=last;
+        }
+        return digits;
+    }
+
     public static void main(String[] args) {
         int arr2[] = { 1, 1, 3, 2, 2, 3, 5 };
         System.out.println(maxProfit2(arr2));
