@@ -936,15 +936,16 @@ public class Array {
 
     // 66. Plus One
     public int[] plusOne(int[] digits) {
-        int n=digits.length-1;
-        int last=digits[n];
-        if (last==9) {
-            return new int[]{1,0};
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] < 9) {
+                digits[i]++;
+                return digits;
+            }
+            digits[i] = 0;
         }
-        else{
-            last=last+1;
-            digits[n]=last;
-        }
+        
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
         return digits;
     }
 
